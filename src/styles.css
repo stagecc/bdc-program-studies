@@ -1,0 +1,26 @@
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  min-height: 100%;
+}
+
+body {
+  font-family: Monserrat, sans-serif;
+
+  background-image: url("/left-hexagons.svg"), url("/right-hexagons.svg");
+  background-size: 400px;
+  background-position:
+    -4rem 0px,
+    calc(100% + 4rem) 0px;
+  background-repeat: repeat-y, repeat-y;
+  background-attachment: fixed;
+
+  @media screen and (max-width: 750px) {
+    background-image: url("/left-hexagons.svg");
+    background-position: -4rem 0px;
+    background-repeat: repeat-y;
+  }
+}
