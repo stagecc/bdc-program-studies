@@ -1,14 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
 import { getStudiesList } from "./api/studies";
+import { Table } from "./components/Table/Table";
 
 export const Studies = ({ programKey }: { programKey: string }) => {
-  const { data, isFetching, isLoading, error } = useQuery({
+  const { data, isFetching, isLoading, isPending, error } = useQuery({
     queryKey: ["studies", programKey],
     queryFn: ({ signal }) => getStudiesList(programKey, signal),
   });
 
-  if (isFetching || isLoading) return "Loading...";
+  if (isFetching || isLoading || isPending) return "Loading...";
   if (error) return error.message;
 
-  return <pre>{JSON.stringify(data, null, 2)}</pre>;
+  return (
+    <Table
+      rows={data}
+      columns={[
+        {
+          key: "name",
+          headerCell: "Name",
+        },
+        {
+          key: "id",
+          headerCell: "ID",
+          render: ({ id, url }) => <a href={url}>{id}</a>,
+        },
+      ]}
+    />
+  );
 };
