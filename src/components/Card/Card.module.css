@@ -11,8 +11,13 @@
 }
 
 .section {
+  flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.section:first-of-type {
+  max-width: 300px;
 }
 
 .section:not(:last-of-type) .sectionHeader {
@@ -20,16 +25,11 @@
 }
 
 .sectionHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   color: white;
   background-color: var(--color-crimson);
-  text-align: center;
-  padding: 0.5rem 2rem;
+  padding: 10px;
   position: relative;
   font-size: 1.4rem;
-  min-height: 4rem;
   border-bottom: 1px solid var(--color-crimson-dark);
 }
 

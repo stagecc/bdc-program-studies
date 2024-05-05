@@ -1,16 +1,16 @@
 .table {
+  all: unset;
 }
 
 .table thead {
+  background-color: var(--color-lightgrey);
   text-align: left;
-}
-
-.table tbody {
-}
-
-.table tr {
+  position: sticky;
+  top: 0;
 }
 
 .table th,
 .table td {
+  padding: 10px;
+  border-bottom: 1px solid var(--color-grey);
 }

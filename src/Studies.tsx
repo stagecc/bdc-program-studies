@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getStudiesList } from "./api/studies";
 import { Table } from "./components/Table/Table";
+import { Link } from "./components/Link/Link";
 
 export const Studies = ({ programKey }: { programKey: string }) => {
   const { data, isFetching, isLoading, isPending, error } = useQuery({
@@ -22,7 +23,11 @@ export const Studies = ({ programKey }: { programKey: string }) => {
         {
           key: "id",
           headerCell: "ID",
-          render: ({ id, url }) => <a href={url}>{id}</a>,
+          render: ({ id, url }) => (
+            <Link href={url} style={{ justifyContent: "space-between" }}>
+              {id}
+            </Link>
+          ),
         },
       ]}
     />

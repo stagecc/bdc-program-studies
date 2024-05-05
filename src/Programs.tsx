@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getProgramList } from "./api/programs";
 import { Tabs, type TabData } from "./components/Tabs/Tabs";
+import { compactNum } from "./utils";
 
 export const Programs = () => {
   const { data, isPending, isError, error } = useQuery({
@@ -15,10 +16,9 @@ export const Programs = () => {
     ({ name, documentCount, numberOfStudies }) => ({
       key: name,
       title: name,
-      subtitle: `Documents: ${documentCount}, Studies: ${numberOfStudies}`,
+      subtitle: `${compactNum(documentCount)} documents, ${compactNum(numberOfStudies)} studies`,
     })
   );
 
-  // return <pre>{JSON.stringify(data, null, 2)}</pre>;
   return <Tabs data={tabData} />;
 };
