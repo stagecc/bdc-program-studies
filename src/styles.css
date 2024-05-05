@@ -42,9 +42,13 @@ body,
 }
 
 body {
-  font-family: Monserrat, sans-serif;
-  color: #444444;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
   font-size: 13pt;
+
+  color: #444444;
   scroll-behavior: smooth;
 
   background-image: url("/left-hexagons.svg"), url("/right-hexagons.svg");
