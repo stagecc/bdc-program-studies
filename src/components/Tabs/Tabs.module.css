@@ -1,7 +1,11 @@
 .tab {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--color-grey);
   padding: 4px 8px;
   cursor: pointer;
+}
+
+.selected {
+  background-color: var(--color-lightgrey);
 }
 
 .tabHeader {

@@ -10,8 +10,13 @@
   align-items: stretch;
 }
 
-.section:not(:last-child) {
-  border-right: 1px solid black;
+.section {
+  display: flex;
+  flex-direction: column;
+}
+
+.section:not(:last-of-type) .sectionHeader {
+  border-right: 1px solid var(--color-crimson-dark);
 }
 
 .sectionHeader {
@@ -25,7 +30,11 @@
   position: relative;
   font-size: 1.4rem;
   min-height: 4rem;
+  border-bottom: 1px solid var(--color-crimson-dark);
 }
 
 .sectionContent {
+  overflow: auto;
+  flex: 1 0 0;
+  border-right: 1px solid var(--color-grey);
 }
