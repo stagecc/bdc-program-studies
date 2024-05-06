@@ -9,6 +9,12 @@ export const Header = () => (
       </h1>
       <p>View studies conducted by NHLBI BioData Catalyst® (BDC) programs.</p>
     </div>
-    <img src={bdcLogo} />
+    <a
+      href="https://biodatacatalyst.nhlbi.nih.gov/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <img src={bdcLogo} />
+    </a>
   </header>
 );
