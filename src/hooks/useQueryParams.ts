@@ -1,10 +1,20 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useQueryParams = (
   initialState: string | null,
   key: string
 ): [string | null, React.Dispatch<React.SetStateAction<string | null>>] => {
   const [state, setState] = useState(initialState);
+
+  const onPopStateHandler = useCallback(() => {
+    const params = new URLSearchParams(window.location.search);
+    setState(params.get(key));
+  }, [key]);
+
+  useEffect(() => {
+    window.addEventListener("popstate", onPopStateHandler);
+    return () => window.removeEventListener("popstate", onPopStateHandler);
+  }, [onPopStateHandler]);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
