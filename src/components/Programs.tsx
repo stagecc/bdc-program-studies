@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProgramList } from "../api/programs";
 import { Tabs, type TabData } from "./Tabs/Tabs";
 import { compactNum } from "../utils";
+import { LoadingPanel } from "./LoadingPanel/LoadingPanel";
 
 interface ProgramsProps {
   selectedProgram: string | null;
@@ -17,7 +18,7 @@ export const Programs = ({
     queryFn: ({ signal }) => getProgramList(signal),
   });
 
-  if (isPending) return "Loading...";
+  if (isPending) return <LoadingPanel />;
   if (isError) return error.message;
 
   const tabData: TabData = data.map(
