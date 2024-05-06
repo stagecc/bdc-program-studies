@@ -22,7 +22,17 @@ function App() {
           id={`tabpanel-${program}`}
         >
           {program === null ? (
-            "Please select a program"
+            <div
+              style={{
+                display: "flex",
+                height: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "1.2rem",
+              }}
+            >
+              Please select a program to view available studies.
+            </div>
           ) : (
             <Studies programKey={program} />
           )}
