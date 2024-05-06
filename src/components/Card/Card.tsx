@@ -6,7 +6,7 @@ interface CardProps {
 }
 
 export const Card = ({ children }: CardProps) => (
-  <div className={styles.card}>{children}</div>
+  <main className={styles.card}>{children}</main>
 );
 
 interface CardSectionProps {

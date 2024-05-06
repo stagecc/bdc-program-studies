@@ -23,6 +23,7 @@ export const Studies = ({ programKey }: { programKey: string }) => {
         {
           key: "id",
           headerCell: "ID",
+          width: "25%",
           render: ({ id, url }) => (
             <Link
               href={url}

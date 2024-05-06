@@ -16,3 +16,11 @@
   padding: 10px;
   border-bottom: 1px solid var(--color-grey);
 }
+
+.table td {
+  display: table-cell;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

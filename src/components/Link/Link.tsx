@@ -11,8 +11,10 @@ export const Link = ({ href, children, ...props }: LinkProps) => {
   const match = externalUrlPattern.exec(href);
   return (
     <a className={styles.link} {...props} href={href}>
-      {children}
-      {Boolean(match) && <ExternalLinkIcon />}
+      <div className={styles.text}>{children}</div>
+      <div className={styles.linkIcon}>
+        {Boolean(match) && <ExternalLinkIcon />}
+      </div>
     </a>
   );
 };

@@ -33,6 +33,7 @@ export const Programs = ({
       data={tabData}
       selectedTab={selectedProgram}
       setSelectedTab={setSelectedProgram}
+      ariaLabeledBy="programs-title"
     />
   );
 };

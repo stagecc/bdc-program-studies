@@ -17,6 +17,7 @@ interface TableProps<T extends Record<string, string>> {
      * for this column.
      */
     render?: (rowData: T) => ReactNode;
+    width?: string;
   }[];
   /**
    * The data to provide to the table. Must be an array of objects
@@ -41,8 +42,14 @@ export const Table = <T extends Record<string, string>>({
       <tbody>
         {rows.map((row, rowIndex) => (
           <tr key={rowIndex}>
-            {columns.map(({ key, render }) => (
-              <td key={String(key)}>{render ? render(row) : row[key]}</td>
+            {columns.map(({ key, render, width }) => (
+              <td
+                style={{ width }}
+                title={!render ? row[key] : undefined}
+                key={String(key)}
+              >
+                {render ? render(row) : row[key]}
+              </td>
             ))}
           </tr>
         ))}
