@@ -1,5 +1,5 @@
 import styles from "./Tabs.module.css";
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 
 export type TabData = {
   key: string;

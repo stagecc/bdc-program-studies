@@ -1,5 +1,7 @@
 .table {
   all: unset;
+  display: table;
+  width: 100%;
 }
 
 .table thead {

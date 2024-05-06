@@ -8,7 +8,6 @@ export const useQueryParams = (
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    console.log(window.location.search);
     setState(params.get(key));
   }, [setState, key]);
 
