@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { getProgramList } from "./api/programs";
-import { Tabs, type TabData } from "./components/Tabs/Tabs";
-import { compactNum } from "./utils";
+import { getProgramList } from "../api/programs";
+import { Tabs, type TabData } from "./Tabs/Tabs";
+import { compactNum } from "../utils";
 
 interface ProgramsProps {
   selectedProgram: string | null;

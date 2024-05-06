@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { getStudiesList } from "./api/studies";
-import { Table } from "./components/Table/Table";
-import { Link } from "./components/Link/Link";
+import { getStudiesList } from "../api/studies";
+import { Table } from "./Table/Table";
+import { Link } from "./Link/Link";
 
 export const Studies = ({ programKey }: { programKey: string }) => {
   const { data, isFetching, isLoading, isPending, error } = useQuery({
