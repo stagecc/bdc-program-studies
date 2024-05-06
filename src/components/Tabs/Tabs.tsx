@@ -1,3 +1,4 @@
+import { toKebabCase } from "../../utils";
 import styles from "./Tabs.module.css";
 import { useRef, type ReactNode, useState } from "react";
 
@@ -72,11 +73,11 @@ export const Tabs = ({
       {data.map(({ key, title, subtitle }, tabIndex) => (
         <button
           key={key}
-          id={`tab-${key}`}
+          id={`tab-${toKebabCase(key)}`}
           type="button"
           role="tab"
           tabIndex={focusedTabIndex === tabIndex ? undefined : -1}
-          aria-controls={`tabpanel-${key}`}
+          aria-controls={`tabpanel-${toKebabCase(key)}`}
           aria-selected={key === selectedTab ? "true" : "false"}
           ref={(el) => {
             if (el !== null) tabRefs.current[tabIndex] = el;

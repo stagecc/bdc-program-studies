@@ -5,6 +5,7 @@ import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 import { Wrapper } from "./components/Wrapper/Wrapper";
 import { useQueryParams } from "./hooks/useQueryParams";
+import { toKebabCase } from "./utils";
 
 function App() {
   const [program, setProgram] = useQueryParams(null, "program");
@@ -18,8 +19,10 @@ function App() {
         </CardSection>
         <CardSection
           title={`Studies${program === null ? "" : ` - ${program}`}`}
-          ariaLabeledBy={`tab-${program}`}
-          id={`tabpanel-${program}`}
+          ariaLabeledBy={
+            program === null ? undefined : `tab-${toKebabCase(program)}`
+          }
+          id={program === null ? undefined : `tabpanel-${toKebabCase(program)}`}
         >
           {program === null ? (
             <div

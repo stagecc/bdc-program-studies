@@ -14,7 +14,7 @@ export const Header = () => (
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img src={bdcLogo} />
+      <img src={bdcLogo} alt="NHLBI BioData Catalyst logo" />
     </a>
   </header>
 );
