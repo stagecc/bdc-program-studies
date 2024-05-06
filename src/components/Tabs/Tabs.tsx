@@ -1,5 +1,5 @@
 import styles from "./Tabs.module.css";
-import { type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 
 export type TabData = {
   key: string;
@@ -30,14 +30,38 @@ const Check = () => (
 );
 
 export const Tabs = ({ data, selectedTab, setSelectedTab }: TabsProps) => {
-  return data.map(({ key, title, subtitle }) => {
+  const tabRefs = useRef<HTMLButtonElement[]>([]);
+
+  const focusTab = (tabIndex: number) => {
+    const tabRef = tabRefs.current[tabIndex];
+    if (tabRef) tabRef.focus();
+  };
+
+  const handleKeyDown = (
+    tabIndex: number,
+    { key }: React.KeyboardEvent<HTMLButtonElement>
+  ) => {
+    const { length } = tabRefs.current;
+    if (key === "ArrowDown") focusTab((tabIndex + 1) % length);
+    else if (key === "ArrowUp") focusTab((tabIndex - 1 + length) % length);
+    else if (key === "Home") focusTab(0);
+    else if (key === "End") focusTab(length - 1);
+  };
+
+  return data.map(({ key, title, subtitle }, tabIndex) => {
     const isSelected = key === selectedTab;
 
     return (
-      <div
+      <button
         key={key}
+        ref={(el) => {
+          if (el !== null) tabRefs.current[tabIndex] = el;
+        }}
         onClick={() => {
           setSelectedTab(key);
+        }}
+        onKeyDown={(e) => {
+          handleKeyDown(tabIndex, e);
         }}
         className={`${styles.tab} ${isSelected ? styles.selected : ""}`}
       >
@@ -46,7 +70,7 @@ export const Tabs = ({ data, selectedTab, setSelectedTab }: TabsProps) => {
           {selectedTab === key ? <Check /> : null}
         </div>
         <span className={styles.subtitle}>{subtitle}</span>
-      </div>
+      </button>
     );
   });
 };

@@ -1,8 +1,17 @@
 .tab {
   --x-padding: 10px;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  display: block;
+  width: 100%;
   border-bottom: 1px solid var(--color-grey);
   padding: var(--x-padding) 10px;
   cursor: pointer;
+}
+
+.tab:focus {
+  outline-offset: calc(-1 * (var(--x-padding) / 2));
 }
 
 .selected {
