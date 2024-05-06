@@ -13,10 +13,14 @@ function App() {
     <Wrapper>
       <Header />
       <Card>
-        <CardSection title="Programs">
+        <CardSection title={<div id="programs-title">Programs</div>}>
           <Programs selectedProgram={program} setSelectedProgram={setProgram} />
         </CardSection>
-        <CardSection title="Studies">
+        <CardSection
+          title={`Studies${program === null ? "" : ` - ${program}`}`}
+          ariaLabeledBy={`tab-${program}`}
+          id={`tabpanel-${program}`}
+        >
           {program === null ? (
             "Please select a program"
           ) : (

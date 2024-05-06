@@ -11,6 +11,10 @@ interface TabsProps {
   data: TabData;
   selectedTab: string | null;
   setSelectedTab: React.Dispatch<React.SetStateAction<string | null>>;
+  /**
+   * References an `id` value which is used to describe this tablist
+   */
+  ariaLabeledBy: string;
 }
 
 const Check = () => (
@@ -29,7 +33,12 @@ const Check = () => (
   </svg>
 );
 
-export const Tabs = ({ data, selectedTab, setSelectedTab }: TabsProps) => {
+export const Tabs = ({
+  data,
+  selectedTab,
+  setSelectedTab,
+  ariaLabeledBy,
+}: TabsProps) => {
   const tabRefs = useRef<HTMLButtonElement[]>([]);
 
   const getDefaultFocusTab = () => {
@@ -58,26 +67,35 @@ export const Tabs = ({ data, selectedTab, setSelectedTab }: TabsProps) => {
     else if (key === "End") focusTab(length - 1);
   };
 
-  return data.map(({ key, title, subtitle }, tabIndex) => (
-    <button
-      key={key}
-      tabIndex={focusedTabIndex === tabIndex ? 0 : -1}
-      ref={(el) => {
-        if (el !== null) tabRefs.current[tabIndex] = el;
-      }}
-      onClick={() => {
-        setSelectedTab(key);
-      }}
-      onKeyDown={(e) => {
-        handleKeyDown(tabIndex, e);
-      }}
-      className={`${styles.tab} ${key === selectedTab ? styles.selected : ""}`}
-    >
-      <div className={styles.tabHeader}>
-        <p>{title}</p>
-        {selectedTab === key ? <Check /> : null}
-      </div>
-      <span className={styles.subtitle}>{subtitle}</span>
-    </button>
-  ));
+  return (
+    <div role="tablist" aria-labelledby={ariaLabeledBy}>
+      {data.map(({ key, title, subtitle }, tabIndex) => (
+        <button
+          key={key}
+          id={`tab-${key}`}
+          type="button"
+          role="tab"
+          tabIndex={focusedTabIndex === tabIndex ? undefined : -1}
+          aria-controls={`tabpanel-${key}`}
+          aria-selected={key === selectedTab ? "true" : "false"}
+          ref={(el) => {
+            if (el !== null) tabRefs.current[tabIndex] = el;
+          }}
+          onClick={() => {
+            setSelectedTab(key);
+          }}
+          onKeyDown={(e) => {
+            handleKeyDown(tabIndex, e);
+          }}
+          className={`${styles.tab} ${key === selectedTab ? styles.selected : ""}`}
+        >
+          <div className={styles.tabHeader}>
+            <p>{title}</p>
+            {selectedTab === key ? <Check /> : null}
+          </div>
+          <span className={styles.subtitle}>{subtitle}</span>
+        </button>
+      ))}
+    </div>
+  );
 };

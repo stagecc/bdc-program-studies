@@ -12,13 +12,29 @@ export const Card = ({ children }: CardProps) => (
 interface CardSectionProps {
   title: ReactNode;
   children?: ReactNode;
+  ariaLabeledBy?: string;
+  tabPanel?: boolean;
+  id?: string;
 }
 
-export const CardSection = ({ title, children }: CardSectionProps) => {
+export const CardSection = ({
+  title,
+  children,
+  ariaLabeledBy,
+  tabPanel = false,
+  id,
+}: CardSectionProps) => {
   return (
     <div className={styles.section}>
       <header className={styles.sectionHeader}>{title}</header>
-      <div className={styles.sectionContent}>{children}</div>
+      <div
+        className={styles.sectionContent}
+        aria-labelledby={ariaLabeledBy}
+        role={tabPanel ? "tabpanel" : undefined}
+        id={id}
+      >
+        {children}
+      </div>
     </div>
   );
 };
