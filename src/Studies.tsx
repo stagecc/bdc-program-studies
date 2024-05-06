@@ -24,7 +24,12 @@ export const Studies = ({ programKey }: { programKey: string }) => {
           key: "id",
           headerCell: "ID",
           render: ({ id, url }) => (
-            <Link href={url} style={{ justifyContent: "space-between" }}>
+            <Link
+              href={url}
+              style={{ justifyContent: "space-between" }}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {id}
             </Link>
           ),
