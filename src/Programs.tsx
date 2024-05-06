@@ -3,7 +3,15 @@ import { getProgramList } from "./api/programs";
 import { Tabs, type TabData } from "./components/Tabs/Tabs";
 import { compactNum } from "./utils";
 
-export const Programs = () => {
+interface ProgramsProps {
+  selectedProgram: string | null;
+  setSelectedProgram: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+export const Programs = ({
+  selectedProgram,
+  setSelectedProgram,
+}: ProgramsProps) => {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["programs"],
     queryFn: ({ signal }) => getProgramList(signal),
@@ -20,5 +28,11 @@ export const Programs = () => {
     })
   );
 
-  return <Tabs data={tabData} />;
+  return (
+    <Tabs
+      data={tabData}
+      selectedTab={selectedProgram}
+      setSelectedTab={setSelectedProgram}
+    />
+  );
 };

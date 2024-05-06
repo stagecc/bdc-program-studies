@@ -9,8 +9,8 @@ export type TabData = {
 
 interface TabsProps {
   data: TabData;
-  // selectedTab: string | null;
-  // onOnSelectTab: (key: string) => void;
+  selectedTab: string | null;
+  setSelectedTab: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const Check = () => (
@@ -29,9 +29,7 @@ const Check = () => (
   </svg>
 );
 
-export const Tabs = ({ data }: TabsProps) => {
-  const [selectedTab, setSelectedTab] = useState<string | null>(null);
-
+export const Tabs = ({ data, selectedTab, setSelectedTab }: TabsProps) => {
   return data.map(({ key, title, subtitle }) => {
     const isSelected = key === selectedTab;
 
