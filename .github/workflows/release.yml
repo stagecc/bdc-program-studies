@@ -1,0 +1,26 @@
+name: "Push to Github Container Registry"
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish-bdc-program-studies:
+    name: Push studies page to GitHub Container Registry.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - name: Push bdc-program-studies
+        uses: docker/build-push-action@v5
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          path: .
+          dockerfile: ./Dockerfile
+          repository: stagecc/bdc-program-studies
+          tags: latest,${{ steps.get_version.outputs.VERSION }}
