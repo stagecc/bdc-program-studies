@@ -1,0 +1,8 @@
+name: bdc-program-studies
+apiVersion: v2
+version: 1.0.0
+type: application
+description: Studies viewer for BDC programs.
+maintainers:
+  - name: David Glymph
+    email: dglymph@renci.org
