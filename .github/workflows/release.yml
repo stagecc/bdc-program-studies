@@ -5,29 +5,22 @@ on:
     types: [published]
 
 jobs:
-  publish-bdc-program-studies:
-    name: Push studies page to GitHub Container Registry.
+  publish:
+    name: Push bdc-program-studies to GHCR.
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v3
+      - name: Push bdc-program-studies
+        uses: docker/build-push-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Push bdc-program-studies
-        uses: docker/build-push-action@v5
-        with:
-          build-args: VITE_DUG_SEARCH_API=https://search-dev.biodatacatalyst.renci.org
-          platform: linux/amd64
-          context: .
-          file: ./Dockerfile
-          push: true
+          path: .
+          dockerfile: ./Dockerfile
+          repository: stagecc/bdc-program-studies
           tags: latest,${{ steps.get_version.outputs.VERSION }}
