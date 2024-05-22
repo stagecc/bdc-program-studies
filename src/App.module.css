@@ -1,0 +1,11 @@
+.dialog {
+  width: 100dvw;
+  height: 100dvh;
+}
+
+.studiesHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

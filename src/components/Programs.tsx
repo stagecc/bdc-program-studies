@@ -21,13 +21,11 @@ export const Programs = ({
   if (isPending) return <LoadingPanel />;
   if (isError) return error.message;
 
-  const tabData: TabData = data.map(
-    ({ name, documentCount, numberOfStudies }) => ({
-      key: name,
-      title: name,
-      subtitle: `${compactNum(documentCount)} documents, ${compactNum(numberOfStudies)} studies`,
-    })
-  );
+  const tabData: TabData = data.map(({ name, numberOfStudies }) => ({
+    key: name,
+    title: name,
+    subtitle: `${compactNum(numberOfStudies)} stud${new Intl.PluralRules("en-US").select(numberOfStudies) === "one" ? "y" : "ies"}`,
+  }));
 
   return (
     <Tabs
